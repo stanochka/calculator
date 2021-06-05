@@ -33,6 +33,7 @@ var arr = [];
 var operator;
 var result;
 
+//TODO: make result show after operations button click if display not zero
 buttons.forEach(button => {
   button.addEventListener('click', () => {
     if (!isNaN(button.id)) {
@@ -40,6 +41,7 @@ buttons.forEach(button => {
       display.textContent = num.join('');
     } else if (button.id !== 'clear' && button.id !== 'equals') {
       arr.push(parseInt(num.join('')));
+      console.log(arr);
       num.length = 0;
       operator = button.id;
     } else if (button.id === 'clear') {
@@ -48,10 +50,11 @@ buttons.forEach(button => {
       arr.length = 0;
     } else if (button.id === 'equals') {
       arr.push(parseInt(num.join('')));
-      num.length = 0;
       result = operate(operator, ...arr);
       display.textContent = result;
-      arr = [result];
+      num = result.toString().split('');
+      console.log(num);
+      arr = [];
     }
   })
 })
