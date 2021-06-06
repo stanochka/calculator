@@ -41,6 +41,7 @@ button {
   font-family: 'Open Sans', sans-serif;
   border-radius: 10px;
   cursor: pointer;
+  background: #fafafa; 
 }
 
 .operation, .clear, .delete, .equals {
