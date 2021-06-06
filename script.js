@@ -33,18 +33,14 @@ var arr = [];
 var operator;
 var result;
 
-//TODO: fix precision bug
 buttons.forEach(button => {
   button.addEventListener('click', () => {
     if (button.className == 'num') {
       if (num.length < 8) {
         num = num.concat(button.id);
       };
-      console.log('num');
-      console.log(num);
       display.textContent = num;
     } else if (button.className == 'point' && num.indexOf('.') === -1) {
-      console.log('point');
       num = num.concat('.');
       display.textContent = num;
       button.disabled = true;
@@ -55,30 +51,32 @@ buttons.forEach(button => {
         num = num.concat('-');
         display.textContent = num;
       } else {
-        console.log('operation')
         buttons.forEach(button => {button.disabled = false;});
         arr.push(parseFloat(num));
-        console.log(arr);
         num = '';
         operator = button.id;
         if (arr.length === 2) {
-          console.log('second operation')
           result = operate(operator, ...arr);
-          display.textContent = result;
+          num = result.toString();
+          if (num.length > 9 && num.indexOf('.') !== -1) {
+            let precision = 9 - (num.indexOf('.'));
+            num = num.slice(0, precision);
+            num = num.replace(/0+$/, '');
+          } else if (num.length > 8) {
+            num = 'OVERFLOW';
+          }
+          display.textContent = num;
           arr = [];
           num = '';
           arr.push(result);
-          console.log(arr);
         };
       };
     } else if (button.id === 'clear') {
-      console.log('clear');
       display.textContent = '0';
       num = '';
       arr.length = 0;
       buttons.forEach(button => {button.disabled = false;});
     } else if (button.id === 'delete') {
-      console.log('delete');
       num = num.slice(0, num.length-1);
       display.textContent = num;
       if (num.indexOf('.') === -1) {
@@ -87,8 +85,16 @@ buttons.forEach(button => {
     } else if (button.id === 'equals' && arr.length === 1) {
       buttons.forEach(button => {button.disabled = false;});
       arr.push(parseFloat(num));
+      console.log(arr);
       result = operate(operator, ...arr);
       num = result.toString();
+      if (num.length > 9 && num.indexOf('.') !== -1) {
+        let precision = 9 - (num.indexOf('.'));
+        num = num.slice(0, precision);
+        num = num.replace(/0+$/, '');
+      } else if (num.length > 8) {
+        num = 'OVERFLOW';
+      }
       display.textContent = num;
       arr = [];
     }
