@@ -3,4 +3,4 @@
 Calculator project. Here I practiced:
 - CSS grid;
 - JS DOM manipulation;
-- JS float number precision;
+- JS functions.

@@ -52,8 +52,10 @@ buttons.forEach(button => {
         display.textContent = num;
       } else {
         buttons.forEach(button => {button.disabled = false;});
-        arr.push(parseFloat(num));
-        num = '';
+        if (arr.length !== 1) {
+          arr.push(parseFloat(num));
+          num = '';
+        }
         operator = button.id;
         if (arr.length === 2) {
           result = operate(operator, ...arr);
@@ -96,6 +98,8 @@ buttons.forEach(button => {
       }
       display.textContent = num;
       arr = [];
+      arr.push(parseFloat(num));
+      num = '';
     }
   })
 })
