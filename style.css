@@ -43,7 +43,7 @@ button {
   cursor: pointer;
 }
 
-.operation {
+.operation, .clear, .delete, .equals {
   background: #FCBD6A;
 }
 
