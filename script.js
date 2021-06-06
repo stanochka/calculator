@@ -85,7 +85,6 @@ buttons.forEach(button => {
     } else if (button.id === 'equals' && arr.length === 1) {
       buttons.forEach(button => {button.disabled = false;});
       arr.push(parseFloat(num));
-      console.log(arr);
       result = operate(operator, ...arr);
       num = result.toString();
       if (num.length > 9 && num.indexOf('.') !== -1) {
