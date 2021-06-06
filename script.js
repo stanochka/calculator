@@ -28,7 +28,7 @@ const operate = (operator, a, b) => {
 
 const buttons = document.querySelectorAll('button');
 const display = document.querySelector('#display');
-var num = [];
+var num = '';
 var arr = [];
 var operator;
 var result;
@@ -36,24 +36,55 @@ var result;
 //TODO: make result show after operations button click if display not zero
 buttons.forEach(button => {
   button.addEventListener('click', () => {
-    if (!isNaN(button.id)) {
-      num.push(button.id);
-      display.textContent = num.join('');
-    } else if (button.id !== 'clear' && button.id !== 'equals') {
-      arr.push(parseInt(num.join('')));
-      console.log(arr);
-      num.length = 0;
-      operator = button.id;
-    } else if (button.id === 'clear') {
-      display.textContent = '0';
-      num.length = 0;
-      arr.length = 0;
-    } else if (button.id === 'equals') {
-      arr.push(parseInt(num.join('')));
-      result = operate(operator, ...arr);
-      display.textContent = result;
-      num = result.toString().split('');
+    if (button.className == 'num') {
+      if (num.length < 8) {
+        num = num.concat(button.id);
+      };
+      console.log('num');
       console.log(num);
+      display.textContent = num;
+    } else if (button.className == 'point' && num.indexOf('.') === -1) {
+      console.log('point');
+      num = num.concat('.');
+      display.textContent = num;
+      button.disabled = true;
+    } else if (button.id !== 'clear'
+            && button.id !== 'delete'
+            && button.id !== 'equals') {
+      console.log('operation')
+      buttons.forEach(button => {button.disabled = false;});
+      arr.push(parseFloat(num));
+      console.log(arr);
+      num = '';
+      operator = button.id;
+      if (arr.length === 2) {
+        console.log('second operation')
+        result = operate(operator, ...arr);
+        display.textContent = result;
+        arr = [];
+        num = '';
+        arr.push(result);
+        console.log(arr);
+      }
+    } else if (button.id === 'clear') {
+      console.log('clear');
+      display.textContent = '0';
+      num = '';
+      arr.length = 0;
+      buttons.forEach(button => {button.disabled = false;});
+    } else if (button.id === 'delete') {
+      console.log('delete');
+      num = num.slice(0, num.length-1);
+      display.textContent = num;
+      if (num.indexOf('.') === -1) {
+        buttons.forEach(button => {button.disabled = false;});
+      }
+    } else if (button.id === 'equals' && arr.length === 1) {
+      buttons.forEach(button => {button.disabled = false;});
+      arr.push(parseFloat(num));
+      result = operate(operator, ...arr);
+      num = result.toString();
+      display.textContent = num;
       arr = [];
     }
   })

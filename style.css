@@ -37,11 +37,15 @@ body {
 
 button {
   margin: 8px;
-  font-size: 1.5em;
+  font-size: 1.3em;
   font-family: 'Open Sans', sans-serif;
   border-radius: 10px;
 }
 
 .operation {
   background: #FCBD6A;
+}
+
+#clear, #delete {
+  grid-column: span 2;
 }
