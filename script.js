@@ -33,7 +33,7 @@ var arr = [];
 var operator;
 var result;
 
-//TODO: make result show after operations button click if display not zero
+//TODO: fix precision bug
 buttons.forEach(button => {
   button.addEventListener('click', () => {
     if (button.className == 'num') {
@@ -51,21 +51,26 @@ buttons.forEach(button => {
     } else if (button.id !== 'clear'
             && button.id !== 'delete'
             && button.id !== 'equals') {
-      console.log('operation')
-      buttons.forEach(button => {button.disabled = false;});
-      arr.push(parseFloat(num));
-      console.log(arr);
-      num = '';
-      operator = button.id;
-      if (arr.length === 2) {
-        console.log('second operation')
-        result = operate(operator, ...arr);
-        display.textContent = result;
-        arr = [];
-        num = '';
-        arr.push(result);
+      if (button.id === 'substract' && num == '') {
+        num = num.concat('-');
+        display.textContent = num;
+      } else {
+        console.log('operation')
+        buttons.forEach(button => {button.disabled = false;});
+        arr.push(parseFloat(num));
         console.log(arr);
-      }
+        num = '';
+        operator = button.id;
+        if (arr.length === 2) {
+          console.log('second operation')
+          result = operate(operator, ...arr);
+          display.textContent = result;
+          arr = [];
+          num = '';
+          arr.push(result);
+          console.log(arr);
+        };
+      };
     } else if (button.id === 'clear') {
       console.log('clear');
       display.textContent = '0';
