@@ -7,7 +7,7 @@ body {
   justify-content: center;
   align-items: center;
   background: #9EEDC2;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Electrolize', sans-serif;
 }
 
 #container {
@@ -24,7 +24,6 @@ body {
   height: 40px;
   text-align: right;
   font-size: 2.3em;
-  font-family: 'Electrolize', sans-serif;
   padding: 5px;
   margin: 30px auto;
 }
@@ -39,6 +38,7 @@ body {
 button {
   margin: 8px;
   font-size: 1.5em;
+  font-family: 'Open Sans', sans-serif;
   border-radius: 10px;
 }
 
