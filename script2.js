@@ -87,7 +87,6 @@ function deleteNumber() {
 }
 
 function setOperation(operator) {
-  console.log(operator)
   if (operation !== null) evaluate();
   firstNumber = display.textContent;
   operation = operator;
